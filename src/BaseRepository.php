@@ -63,15 +63,6 @@ abstract class BaseRepository
     }
 
     /**
-     * Get the first result.
-     * @return Collection
-     */
-    public function first()
-    {
-        return $this->collect($this->sdk->get($this->resource, ['first' => true]));
-    }
-
-    /**
      * Create a resource
      * @param $payload
      * @return mixed

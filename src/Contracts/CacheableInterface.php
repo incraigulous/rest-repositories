@@ -3,6 +3,12 @@ namespace Incraigulous\RestRepositories\Contracts;
 
 interface CacheableInterface
 {
+
+    /**
+     * Overload calls to Incraigulous\RestRepositories\CacheInterceptor.
+     */
+    public function cache();
+
 	/**
      * Execute and/or cache a callback.
      * @param callable $callback

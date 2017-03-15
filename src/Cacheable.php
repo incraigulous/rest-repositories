@@ -8,7 +8,7 @@ use Cache;
  * The default cache interface is built for Laravel's cacher. 
  * 
  * If you're not using laravel you can either: 
- * - Provide a static Cache class that implements Laravel's cache interface or
+ * - Provide a static \Cache class that implements Laravel's cache interface or
  * - Have your base repository implement Icraigulous/RestRepositories/Contracts/Cacher and build your own.
  */
 
