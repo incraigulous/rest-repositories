@@ -66,12 +66,12 @@ You can cache your requests by using the `Incraigulous\RestRepositories\Cacheabl
 	
 	class JsonPlaceholderPostsRepository extends JsonPlaceholderBaseRepository
 	{
-		 use Cacheable;
+	    use Cacheable;
 	
-		protected $cacheTime = 10; //How long to cache.
+	    protected $cacheTime = 10; //How long to cache.
 	    protected $cacheable = []; //The included methods can be cached. If no methods included, any method can be cached.
 	    protected $cacheExcept = []; //The included methods can not be cached.	
-		public $resource = 'posts';
+	    public $resource = 'posts';
 	}
 	
 	$repo = new JsonPlaceholderPostsRepository();
