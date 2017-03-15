@@ -1,8 +1,8 @@
-#Rest Repositories
+# Rest Repositories
 
 Fetch data from any rest API with a common interface.
 
-###In a nutshell
+### In a nutshell
 You should be able to fetch data from ANY webservice using the following API: 
 
 ```
@@ -18,10 +18,10 @@ or
 
 This keeps you from having to create a seperate mental map for each web service you work with. 
 
-##Repositories
+## Repositories
 It's the job of the repository to abstract working with your webservice to a common interface. Providing an instance of `Incraigulous\RestRepositories\Contracts\SdkInterface` will allow you to extend `Incraigulous\RestRepositories\BaseRepository` for minimal setup. You are also free to implement `Incraigulous\RestRepositories\Contracts\RepositoryInterface` if you want to use your webservice's out-of-the-box SDK library.  
 
-###Repository methods:
+### Repository methods:
 ```
 	public function get($params = []);
 	public function update($id, $params = []);
@@ -31,7 +31,7 @@ It's the job of the repository to abstract working with your webservice to a com
 	public function delete($payload);
 ```
     
-###Creating a base repository for a webservice
+### Creating a base repository for a webservice
 ```
 	//This is just an example, you should create your own SDK implementation
 	use Incraigulous\RestRepositories\Sdks\JsonPlaceholderSdk; 
@@ -46,7 +46,7 @@ It's the job of the repository to abstract working with your webservice to a com
 	}
 ```
 
-###Creating a repository
+### Creating a repository
 ```
 	class JsonPlaceholderPostsRepository extends JsonPlaceholderBaseRepository
 	{
@@ -58,7 +58,7 @@ It's the job of the repository to abstract working with your webservice to a com
     
 ```
 
-###Caching
+### Caching
 You can cache your requests by using the `Incraigulous\RestRepositories\Cacheable` trait. This works with Laravel's built in cache class. If you don't use Laravel, you can implement `Incraigulous\RestRepositories\Contracts\CacheableInterface` in your base repository. 
 
 ```
@@ -82,11 +82,11 @@ You can cache your requests by using the `Incraigulous\RestRepositories\Cacheabl
 ```
 
 
-##SDKs
+## SDKs
 It's the job of an SDK class to make requests to a webservice. SDKs should implement `Incraigulous\RestRepositories\Contracts\SdkInterface`. To make this easy, a base `Incraigulous\RestRepositories\Sdks\HttpSdk` class is provided.
 
-###Using the HttpSdk class on the fly
-####Without authentication
+### Using the HttpSdk class on the fly
+#### Without authentication
 
 ```
 	$sdk = new HttpSdk('https://jsonplaceholder.typicode.com/');
@@ -94,7 +94,7 @@ It's the job of an SDK class to make requests to a webservice. SDKs should imple
 
 ```
 
-####With authentication
+#### With authentication
 
 ```
 	$sdk = new HttpSdk('http://example.com/api/', ['Authorization' => 'password123']);
@@ -102,8 +102,8 @@ It's the job of an SDK class to make requests to a webservice. SDKs should imple
 
 ```
 
-###Even Better: Creating your own SDK class
-####Without authentication
+### Even Better: Creating your own SDK class
+#### Without authentication
 ```
 	<?php
 	use Incraigulous\RestRepositories\Sdks\HttpSdk;
@@ -117,7 +117,7 @@ It's the job of an SDK class to make requests to a webservice. SDKs should imple
 	$result = $sdk->post('posts', ['title' => 'foo', 'body' => 'bar', 'userId' => 1]);
 ```
 
-####With authentication
+#### With authentication
 
 ```
 	<?php
@@ -137,7 +137,7 @@ It's the job of an SDK class to make requests to a webservice. SDKs should imple
 	$result = $sdk->post('posts', ['title' => 'foo', 'body' => 'bar', 'userId' => 1]);
 ```
 
-##Testing
+## Testing
 ```
 	/vendor/bin/phpunit
 ```	
