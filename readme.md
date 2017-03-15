@@ -97,7 +97,7 @@ It's the job of an SDK class to make requests to a webservice. SDKs should imple
 #### With authentication
 
 ```
-	$sdk = new HttpSdk('http://example.com/api/', ['Authorization' => 'password123']);
+	$sdk = new HttpSdk('http://example.com/api/', ['headers' => ['Authorization' => 'password123']]);
 	$result = $sdk->post('posts', ['title' => 'foo', 'body' => 'bar', 'userId' => 1]);
 
 ```

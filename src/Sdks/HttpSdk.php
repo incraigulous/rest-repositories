@@ -16,13 +16,13 @@ use Incraigulous\RestRepositories\Contracts\SdkInterface;
 class HttpSdk implements SdkInterface
 {
     protected $endpoint = '';
-    protected $defaultHeaders = [];
+    protected $options = [];
     protected $client;
 
-    function __construct($endpoint = '', $headers = [])
+    function __construct($endpoint = '', $options = [])
     {
         if ($endpoint) $this->endpoint = $endpoint;
-        if (count($headers)) $this->defaultHeaders = $headers;
+        $this->options = $options;
         $this->setup();
     }
 
@@ -42,7 +42,7 @@ class HttpSdk implements SdkInterface
      */
     protected function defaultHeaders()
     {
-    	return $this->defaultHeaders;
+    	return (!empty($this->options['headers'])) ? $this->options['headers'] : [];
     }
 
     /**
