@@ -1,49 +1,51 @@
-<?php 
+<?php
 namespace Incraigulous\RestRepositories;
 
+use Incraigulous\RestRepositories\Contracts\RepositoryInterface;
 use Incraigulous\RestRepositories\Contracts\SdkInterface;
 use Kumuwai\DataTransferObject\DTO;
 
 /**
-* The base repository.
-*/
-abstract class BaseRepository
+ * The base repository.
+ */
+abstract class BaseRepository implements RepositoryInterface
 {
-	protected $resource;
+    protected $resource;
     protected $sdk;
+    protected $dataKey;
 
-	function __construct(SdkInterface $sdk = null)
-	{
-		$this->sdk = $sdk;
-		$this->setup();
-	}
+    function __construct(SdkInterface $sdk = null)
+    {
+        $this->sdk = $sdk;
+        $this->setup();
+    }
 
-	//Do whatever bootstrapping needed to get the repo up and running.
-	protected function setup() {
+    //Do whatever bootstrapping needed to get the repo up and running.
+    protected function setup() {
         //To use in child classes
     }
 
-	/**
-	 * Get the resource. 
-	 * @param  array  $params [description]
-	 * @return array
-	 */
-	public function get($params = [])
-	{
-		return $this->collect($this->sdk->get($this->resource, $params));
-	}
+    /**
+     * Get the resource.
+     * @param  array  $params [description]
+     * @return array
+     */
+    public function get($params = [])
+    {
+        return $this->collect($this->sdk->get($this->resource, $params));
+    }
 
-	/**
-	 * Update the resource
-	 * @param  array  $params [description]
-	 * @return array
-	 */
-	public function update($id, $params = [])
-	{
-		return $this->collect($this->sdk->put($this->resource . '/' . $id, $params));
-	}
+    /**
+     * Update the resource
+     * @param  array  $params [description]
+     * @return array
+     */
+    public function update($id, $params = [])
+    {
+        return $this->collect($this->sdk->put($this->resource . '/' . $id, $params));
+    }
 
-	/**
+    /**
      * Return the entire resource.
      * @return \Illuminate\Support\Collection
      */
@@ -85,12 +87,27 @@ abstract class BaseRepository
     }
 
     /**
+     * By default, return the data key if it exists.
+     *
+     * @param $response
+     * @return mixed
+     */
+    protected function formatResponse($response) {
+        if ($this->dataKey) {
+            if (isset($response[$this->dataKey])) {
+                return $response[$this->dataKey];
+            }
+        }
+        return $response;
+    }
+
+    /**
      * Turn the data into and arrayable object.
      * @param  $data
      * @return Kumuwai\DataTransferObject\DTO
      */
-    protected function collect($data) 
+    protected function collect($data)
     {
-    	return new DTO($data);
+        return new DTO($this->formatResponse($data));
     }
 }

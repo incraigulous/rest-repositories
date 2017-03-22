@@ -7,22 +7,22 @@ use Incraigulous\RestRepositories\Contracts\SdkInterface;
 
 /**
  * A generic http sdk.
- * 
+ *
  * This can be extended to make specific API implementations.
- * 
- * For more robust customizations, you can also 
+ *
+ * For more robust customizations, you can also
  * implement Incraigulous\RestRepositories\Contracts\SdkInterface
  */
 class HttpSdk implements SdkInterface
 {
     protected $endpoint = '';
-    protected $options = [];
+    protected $defaultHeaders = [];
     protected $client;
 
-    function __construct($endpoint = '', $options = [])
+    function __construct($endpoint = '', $headers = [])
     {
         if ($endpoint) $this->endpoint = $endpoint;
-        $this->options = $options;
+        if (count($headers)) $this->defaultHeaders = $headers;
         $this->setup();
     }
 
@@ -42,7 +42,7 @@ class HttpSdk implements SdkInterface
      */
     protected function defaultHeaders()
     {
-    	return (!empty($this->options['headers'])) ? $this->options['headers'] : [];
+        return $this->defaultHeaders;
     }
 
     /**
@@ -54,7 +54,7 @@ class HttpSdk implements SdkInterface
      */
     public function get($resource, array $params = [], array $headers = [])
     {
-        $response = $this->client->get($resource, [
+        $response = $this->client->get($this->formatUrl($resource), [
             'query' => $params,
             'headers' => $headers
         ]);
@@ -70,7 +70,7 @@ class HttpSdk implements SdkInterface
      */
     public function post($resource, array $payload = [], array $headers = [])
     {
-        $response = $this->client->post($this->endpoint . $resource, [
+        $response = $this->client->post($this->formatUrl($resource), [
             'form_params' => $payload,
             'headers' => $headers
         ]);
@@ -86,7 +86,7 @@ class HttpSdk implements SdkInterface
      */
     public function put($resource, array $payload = [], array $headers = [])
     {
-        $response = $this->client->put($this->endpoint . $resource, [
+        $response = $this->client->put($this->formatUrl($resource), [
             'form_params' => $payload,
             'headers' => $headers
         ]);
@@ -102,13 +102,22 @@ class HttpSdk implements SdkInterface
      */
     public function delete($resource, array $params = [], array $headers = [])
     {
-        $response = $this->client->delete($this->endpoint . $resource, [
+        $response = $this->client->delete($this->formatUrl($resource), [
             'query' => $params,
             'headers' => $headers
         ]);
         return $this->formatResponse($response);
     }
 
+    /**
+     * Transform the url before sending the request.
+     * @param $url
+     * @return mixed
+     */
+    protected function formatUrl($url)
+    {
+        return $url;
+    }
 
     /**
      * Transform the response to and array (or whatever you want the result to be)
@@ -117,6 +126,6 @@ class HttpSdk implements SdkInterface
      */
     protected function formatResponse(Response $response)
     {
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
