@@ -14,8 +14,7 @@
     "autoload": {
         "psr-4": {
             "Incraigulous\\RestRepositories\\": "src/"
-        },
-        "files": ["src/helpers.php"]
+        }
     },
     "authors": [
         {
