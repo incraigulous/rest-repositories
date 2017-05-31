@@ -32,7 +32,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function get($params = [])
     {
-        return $this->collect($this->sdk->get($this->resource, $params));
+        return $this->formatResponse($this->sdk->get($this->resource, $params));
     }
 
     /**
@@ -42,7 +42,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function update($id, $params = [])
     {
-        return $this->collect($this->sdk->put($this->resource . '/' . $id, $params));
+        return $this->formatResponse($this->sdk->put($this->resource . '/' . $id, $params));
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function all()
     {
-        return $this->collect($this->sdk->get($this->resource));
+        return $this->formatResponse($this->sdk->get($this->resource));
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        return $this->collect($this->sdk->get($this->resource . '/' . $id));
+        return $this->formatResponse($this->sdk->get($this->resource . '/' . $id));
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function create($payload)
     {
-        $result = $this->collect($this->sdk->post($this->resource, $payload));
+        $result = $this->formatResponse($this->sdk->post($this->resource, $payload));
         return $result;
     }
 
@@ -82,26 +82,25 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function delete($payload)
     {
-        $result = $this->collect($this->sdk->delete($this->resource, $payload));
+        $result = $this->formatResponse($this->sdk->delete($this->resource, $payload));
         return $result;
     }
 
     /**
-     * By default, return the data key if it exists.
-     *
+     * Format the response.
      * @param $response
-     * @return mixed
+     * @return Collection|Object
      */
     protected function formatResponse($response) {
-        return $response;
+        return $this->objectify($response);
     }
 
     /**
-     * Turn the data into and arrayable object.
-     * @param  $data
-     * @return Kumuwai\DataTransferObject\DTO
+     * Turn the data into nested collections or an arrayable object.
+     * @param $data
+     * @return Collection|Object
      */
-    protected function collect($data)
+    protected function objectify($data)
     {
         return ($this->is_multi($data)) ? new Collection($data) : new Object($data);
     }
