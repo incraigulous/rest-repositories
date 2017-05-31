@@ -3,7 +3,7 @@ namespace Incraigulous\RestRepositories;
 
 use Incraigulous\RestRepositories\Contracts\RepositoryInterface;
 use Incraigulous\RestRepositories\Contracts\SdkInterface;
-use Kumuwai\DataTransferObject\DTO;
+
 
 /**
  * The base repository.
@@ -93,11 +93,6 @@ abstract class BaseRepository implements RepositoryInterface
      * @return mixed
      */
     protected function formatResponse($response) {
-        if ($this->dataKey) {
-            if (isset($response[$this->dataKey])) {
-                return $response[$this->dataKey];
-            }
-        }
         return $response;
     }
 
@@ -108,6 +103,12 @@ abstract class BaseRepository implements RepositoryInterface
      */
     protected function collect($data)
     {
-        return new DTO($this->formatResponse($data));
+        return ($this->is_multi($data)) ? new Collection($data) : new Object($data);
+    }
+
+    protected function is_multi($a) {
+        $rv = array_filter($a,'is_array');
+        if(count($rv)>0) return true;
+        return false;
     }
 }

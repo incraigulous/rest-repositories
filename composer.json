@@ -4,7 +4,9 @@
     "type": "library",
     "require": {
         "kumuwai/data-transfer-object": "^0.0.4",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "schulzefelix/laravel-data-transfer-object": "^1.0",
+        "tightenco/collect": "^5.4"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.0",

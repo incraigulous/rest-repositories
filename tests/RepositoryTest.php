@@ -4,16 +4,16 @@ use PHPUnit\Framework\TestCase;
 use Incraigulous\RestRepositories\Repositories\JsonPlaceholder\JsonPlaceholderPostsRepository;
 
 class RepositoryTest extends TestCase
-{
-  /**
-   * @test
-   */
-  public function test_it_can_get_all()
-  {
-    $repo = new JsonPlaceholderPostsRepository();
-    $posts = $repo->all();
-    $this->assertGreaterThan(0, count($posts));
-  }
+{  /**
+ * @test
+ */
+    public function test_it_can_get_all()
+    {
+        $repo = new JsonPlaceholderPostsRepository();
+        $posts = $repo->all();
+        $this->assertGreaterThan(0, count($posts));
+    }
+
 
     /**
      * @test
