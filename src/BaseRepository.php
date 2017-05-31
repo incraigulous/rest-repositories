@@ -102,12 +102,13 @@ abstract class BaseRepository implements RepositoryInterface
      */
     protected function objectify($data)
     {
-        return ($this->is_multi($data)) ? new Collection($data) : new Object($data);
+        $data = ($this->dataKey) ? $data[$this->dataKey] : $data;
+        return ($this->isAssoc($data)) ? new Object($data) : new Collection($data);
     }
 
-    protected function is_multi($a) {
-        $rv = array_filter($a,'is_array');
-        if(count($rv)>0) return true;
-        return false;
+    protected function isAssoc($arr)
+    {
+        if (array() === $arr) return false;
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 }
