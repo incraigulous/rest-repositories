@@ -103,7 +103,7 @@ abstract class BaseRepository implements RepositoryInterface
     protected function objectify($data)
     {
         $data = ($this->dataKey && !empty($data[$this->dataKey])) ? $data[$this->dataKey] : $data;
-        return ($this->isAssoc($data)) ? new Object($data) : new Collection($data);
+        return ($this->isAssoc($data)) ? new Object($data, $this->dataKey) : new Collection($data, $this->dataKey);
     }
 
     protected function isAssoc($arr)
