@@ -68,7 +68,7 @@ trait Cacheable {
      */
     protected function generateCacheKey($baseString = null, $params = [])
     {
-        return md5(debug_backtrace()[1]['function'] . '_' . (!$baseString) ? get_class($this) . '_' . json_encode($params) : $baseString . '_' . json_encode($params));
+        return md5($baseString  . get_class($this) . json_encode($params));
     }
 
     /**
@@ -77,9 +77,9 @@ trait Cacheable {
      * @param array $params
      * @return mixed
      */
-    public function callOrCached(callable $callback, $params = [])
+    public function callOrCached(callable $callback, $name, $params = [])
     {
-        $key = $this->generateCacheKey(debug_backtrace()[1]['function'] . get_class($this), $params);
+        $key = $this->generateCacheKey($name, $params);
         if (!Cache::has($key)) {
             $result = call_user_func($callback, $params);
             Cache::put($key, $result, $this->cacheTime);
