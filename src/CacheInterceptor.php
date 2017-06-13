@@ -23,7 +23,7 @@ class CacheInterceptor
         if ($this->repository->shouldCacheMethod($name)) {
             return $this->repository->callOrCached(function() use ($name, $arguments) {
                 return call_user_func_array([$this->repository, $name], $arguments);
-            }, $arguments);
+            }, $name, $arguments);
         }
         return call_user_func_array([$this->repository, $name], $arguments);
     }
