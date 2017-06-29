@@ -13,4 +13,14 @@ class Object extends DataTransferObject
         $attributes = $this->collect($attributes, $dataKey);
         $this->fill($attributes);
     }
+    
+    /**
+     * Get the attributes that should be converted to dates.
+     *
+     * @return array
+     */
+    public function getDates()
+    {
+        return $this->dates;
+    }
 }
