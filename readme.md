@@ -62,9 +62,9 @@ For example:
    A listing is for API resources with full read only capability. The resource object has the following methods: 
    
    ```
-   	public function get($params = []);
-   	public function all();
-   	public function find($id);
+   	public static function get($params = []);
+   	public static function all();
+   	public static function find($id);
    ```
    
    To create a new class extend `Incraigulous\RestRepositories\Listing`: 
@@ -75,7 +75,7 @@ For example:
 A single is for API resources for a single listing endpoint. The resource object has only the `get` method.: 
 
 ```
-	public function get($params = []);
+	public static function get($params = []);
 ```
 
 To create a new single extend `Incraigulous\RestRepositories\Single`: 
