@@ -19,6 +19,6 @@ trait HasCreate
      */
     public static function create($payload)
     {
-        return self::formatResponse(static::sdk()->post(static::$resource, $payload));
+        return static::formatResponse(static::sdk()->post(static::$resource, $payload));
     }
 }

@@ -18,6 +18,6 @@ trait HasAll
      */
     public static function all()
     {
-        return self::formatResponse(static::sdk()->get(static::$resource));
+        return static::formatResponse(static::sdk()->get(static::$resource));
     }
 }
