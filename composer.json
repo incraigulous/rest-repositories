@@ -6,7 +6,7 @@
         "kumuwai/data-transfer-object": "^0.0.4",
         "guzzlehttp/guzzle": "^6.2",
         "schulzefelix/laravel-data-transfer-object": "^1.0",
-        "illuminate/support": "^5.6"
+        "illuminate/support": ">=5.5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.0"
