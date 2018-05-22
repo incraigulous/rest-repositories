@@ -17,7 +17,7 @@ or
 This keeps you from having to create a separate mental map for each web service you work with. 
 
 ## Repositories
-It's the job of the repository to abstract working with your webservice to a common interface. Providing an instance of `Incraigulous\RestRepositories\Contracts\SdkInterface` will allow you to extend `Incraigulous\RestRepositories\Single`, `Incraigulous\RestRepositories\Listing` or `Incraigulous\RestRepositories\Resource` for minimal setup. 
+It's the job of the repository to abstract working with your webservice to a common interface. Extend `Incraigulous\RestRepositories\Single`, `Incraigulous\RestRepositories\Listing` or `Incraigulous\RestRepositories\Resource` for minimal setup.
 
 ### Resources
 A resource repository supplies the following methods: 
