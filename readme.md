@@ -1,17 +1,17 @@
 # Rest Repositories
 
-Fetch data from any rest API with a common interface.
+Fetch data from any rest API with a common interface. Api results are returned wrapped in easy-to-work-with, fluent collection and object wrappers.
 
 ### In a nutshell
-You should be able to fetch data from ANY webservice using the following API: 
+You should be able to fetch data from any webservice and then access it using the following API: 
 
 ```
-	$posts = PostsRepository::all();
+	$posts = PostsRepository::all()->first()->title;
 ```
 or 
 
 ```
-	$post = PostsRepository::find(1);
+	$post = PostsRepository::find(1)->author->image->url;
 ```
 
 This keeps you from having to create a separate mental map for each web service you work with. 
@@ -19,17 +19,6 @@ This keeps you from having to create a separate mental map for each web service 
 ## Repositories
 It's the job of the repository to abstract working with your webservice to a common interface. Extend `Incraigulous\RestRepositories\Single`, `Incraigulous\RestRepositories\Listing` or `Incraigulous\RestRepositories\Resource` for minimal setup.
 
-### Resources
-A resource repository supplies the following methods: 
-
-```
-	public static function get($params = []);
-	public static function update($id, $params = []);
-	public static function all();
-	public static function find($id);
-	public static function create($payload);
-	public static function delete($payload);
-```
 
 ### Resources
 A resource is for API resources with full read/write capability. The resource object has the following methods: 
@@ -67,7 +56,7 @@ For example:
    	public static function find($id);
    ```
    
-   To create a new class extend `Incraigulous\RestRepositories\Listing`: 
+   To create a new listing extend `Incraigulous\RestRepositories\Listing`: 
 
 
    
