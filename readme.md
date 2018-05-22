@@ -1,6 +1,6 @@
 # Rest Repositories
 
-Fetch data from any rest API with a common interface.
+Fetch data from any rest API with a common interface. Api results are returned wrapped in easy-to-work-with, fluent collection and object wrappers.
 
 ### In a nutshell
 You should be able to fetch data from ANY webservice using the following API: 
