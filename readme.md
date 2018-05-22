@@ -3,15 +3,15 @@
 Fetch data from any rest API with a common interface. Api results are returned wrapped in easy-to-work-with, fluent collection and object wrappers.
 
 ### In a nutshell
-You should be able to fetch data from ANY webservice using the following API: 
+You should be able to fetch data from ANY webservice and then access it using the following API: 
 
 ```
-	$posts = PostsRepository::all();
+	$posts = PostsRepository::all()->first()->title;
 ```
 or 
 
 ```
-	$post = PostsRepository::find(1);
+	$post = PostsRepository::find(1)->author->image->url;
 ```
 
 This keeps you from having to create a separate mental map for each web service you work with. 
