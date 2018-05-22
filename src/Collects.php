@@ -11,15 +11,17 @@ namespace Incraigulous\RestRepositories;
 
 trait Collects
 {
-    protected function collect($data, $dataKey)
+    protected $_original;
+
+    protected function collect($data, $dataKey = null)
     {
         $result = [];
+        $this->_original = $data;
         $data = $this->unKey($data, $dataKey);
         foreach($data as $key => $record) {
-            $record = $this->unKey($record, $dataKey);
-            if (!is_array($record)) {
+            if (!is_array($this->unKey($record, $dataKey))) {
                 $result[$key] = $record;
-            } elseif ($this->isAssoc($record)) {
+            } elseif ($this->isAssoc($this->unKey($record, $dataKey))) {
                 $result[$key] = new Object($record, $dataKey);
             } else {
                 $result[$key] = new Collection($record, $dataKey);
@@ -28,14 +30,19 @@ trait Collects
         return $result;
     }
 
+    public function getOriginal()
+    {
+        return $this->_original;
+    }
+
     protected function isAssoc($arr)
     {
-        if (array() === $arr) return false;
+        if ([] === $arr) return false;
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     public function unKey($data, $key) {
-        if ($key && !empty($data[$key])) {
+        if ($key && isset($data[$key])) {
             $data = $data[$key];
         }
         return $data;

@@ -25,7 +25,14 @@ class CollectionTest extends TestCase
         [
             'test' => 'asdasdffasdf',
             'test2' => 'teasdasdffasdfst',
-        ]
+        ],
+        [
+            'data' => [],
+            'pagination' => [
+                'count' => 1
+            ]
+        ],
+        []
     ];
 
 
@@ -125,5 +132,37 @@ class CollectionTest extends TestCase
     {
         $collection = new \Incraigulous\RestRepositories\Collection($this->getKeyedNested(), 'data');
         $this->assertEquals($this->getNested(), $collection->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function it_resolves_empty_keyed_collections()
+    {
+        $collection = \Incraigulous\RestRepositories\ResponseFormatter::format([
+            'data' => []
+        ], 'data');
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Collection::class, $collection);
+    }
+
+    /**
+     * @test
+     */
+    public function it_resolves_to_collections_and_objects()
+    {
+        $collection = New \Incraigulous\RestRepositories\Collection($this->mixed, 'data');
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[0]);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[0]['test2']);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[1]);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Collection::class, $collection[2]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_get_original()
+    {
+        $collection = New \Incraigulous\RestRepositories\Collection($this->mixed, 'data');
+        $this->assertEquals($this->mixed[2], $collection[2]->getOriginal());
     }
 }

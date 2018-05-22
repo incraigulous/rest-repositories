@@ -109,6 +109,16 @@ To create a new single extend `Incraigulous\RestRepositories\Single`:
     
 ```
 
+### Getting the original data
+Responses are wrapped in Collection and Object wrappers by default and data keys are stripped out. To access response meta data like pagination or links, you can retrieve the original object like so:
+```
+    PostRepository::all()->getOriginal()['page'];
+    //Or
+    PostRepository::all()->first()->getOriginal()['links'];
+    //Or
+    PostRepository::all()->first()->author->getOriginal()['links'];
+```
+
 ## SDKs
 It's the job of an SDK class to make requests to a webservice. SDKs should implement `Incraigulous\RestRepositories\Contracts\SdkInterface`. To make this easy, a base `Incraigulous\RestRepositories\Sdks\HttpSdk` class is provided.
 
