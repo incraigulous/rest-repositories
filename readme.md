@@ -56,7 +56,7 @@ For example:
    	public static function find($id);
    ```
    
-   To create a new class extend `Incraigulous\RestRepositories\Listing`: 
+   To create a new listing extend `Incraigulous\RestRepositories\Listing`: 
 
 
    
