@@ -137,17 +137,6 @@ class CollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_resolves_empty_keyed_collections()
-    {
-        $collection = \Incraigulous\RestRepositories\ResponseFormatter::format([
-            'data' => []
-        ], 'data');
-        $this->assertInstanceOf(\Incraigulous\RestRepositories\Collection::class, $collection);
-    }
-
-    /**
-     * @test
-     */
     public function it_resolves_to_collections_and_objects()
     {
         $collection = New \Incraigulous\RestRepositories\Collection($this->mixed, 'data');

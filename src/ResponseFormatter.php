@@ -20,7 +20,7 @@ class ResponseFormatter
         $data = ($dataKey && isset($data[$dataKey])) ? $data[$dataKey] : $data;
 
         if (!$data) {
-            return new Collection([], $dataKey);
+            return null;
         }
 
         return (static::isAssoc($data)) ? new Object($data, $dataKey) : new Collection($data, $dataKey);
