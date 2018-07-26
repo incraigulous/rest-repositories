@@ -19,7 +19,7 @@ class ResourceTest extends TestCase
     public function test_it_can_find()
     {
         $post = JsonPlaceholderPostsResource::find(1);
-        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $post);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Item::class, $post);
     }
 
     /**

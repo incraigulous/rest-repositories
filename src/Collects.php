@@ -22,7 +22,7 @@ trait Collects
             if (!is_array($this->unKey($record, $dataKey))) {
                 $result[$key] = $record;
             } elseif ($this->isAssoc($this->unKey($record, $dataKey))) {
-                $result[$key] = new Object($record, $dataKey);
+                $result[$key] = new Item($record, $dataKey);
             } else {
                 $result[$key] = new Collection($record, $dataKey);
             }

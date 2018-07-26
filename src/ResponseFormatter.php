@@ -11,9 +11,11 @@ class ResponseFormatter
 {
     /**
      * Turn the data into nested collections or an arrayable object.
+     *
      * @param $response
      * @param $dataKey
-     * @return Collection|Object
+     *
+     * @return Collection|Item
      */
     public static function format($response, $dataKey = null)
     {
@@ -23,7 +25,7 @@ class ResponseFormatter
             return null;
         }
 
-        return (static::isAssoc($data)) ? new Object($response, $dataKey) : new Collection($response, $dataKey);
+        return (static::isAssoc($data)) ? new Item($response, $dataKey) : new Collection($response, $dataKey);
     }
 
     protected static function isAssoc($arr)

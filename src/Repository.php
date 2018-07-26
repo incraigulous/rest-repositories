@@ -18,7 +18,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Format the response.
      * @param $response
-     * @return Collection|Object
+     * @return Collection|Item
      */
     protected static function formatResponse($response) {
         return ResponseFormatter::format($response, static::$dataKey);

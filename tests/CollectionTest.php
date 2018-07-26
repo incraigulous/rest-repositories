@@ -140,9 +140,9 @@ class CollectionTest extends TestCase
     public function it_resolves_to_collections_and_objects()
     {
         $collection = New \Incraigulous\RestRepositories\Collection($this->mixed, 'data');
-        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[0]);
-        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[0]['test2']);
-        $this->assertInstanceOf(\Incraigulous\RestRepositories\Object::class, $collection[1]);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Item::class, $collection[0]);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Item::class, $collection[0]['test2']);
+        $this->assertInstanceOf(\Incraigulous\RestRepositories\Item::class, $collection[1]);
         $this->assertInstanceOf(\Incraigulous\RestRepositories\Collection::class, $collection[2]);
     }
 

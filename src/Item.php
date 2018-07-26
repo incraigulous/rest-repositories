@@ -4,7 +4,7 @@ namespace Incraigulous\RestRepositories;
 
 use SchulzeFelix\DataTransferObject\DataTransferObject;
 
-class Object extends DataTransferObject
+class Item extends DataTransferObject
 {
     use Collects;
 
