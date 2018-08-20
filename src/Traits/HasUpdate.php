@@ -14,11 +14,16 @@ trait HasUpdate
 
     /**
      * Update the resource
-     * @param  array  $params [description]
+     * @param  array  $payload [description]
      * @return array
      */
-    public static function update($id, $params = [])
+    public static function update($id, $payload = [])
     {
-        return static::formatResponse(static::sdk()->put(static::$resource . '/' . $id, $params));
+        return static::formatResponse(
+            static::sdk()->put(
+                static::$resource . '/' . $id,
+                $payload
+            )
+        );
     }
 }

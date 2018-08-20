@@ -3,7 +3,7 @@ namespace Incraigulous\RestRepositories\Sdks;
 
 /**
  * Json Placeholder SDK.
- * 
+ *
  * A dummy rest service for testing.
  */
 class JsonPlaceholderSdk extends HttpSdk

@@ -13,12 +13,33 @@ trait HasFind
     abstract static function sdk();
 
     /**
-     * Find a result by key.
-     * @param $id
+     * @param       $id
+     * @param array $params
+     *
      * @return mixed
      */
-    public static function find($id)
+    public static function find($id, $params = [])
     {
-        return static::formatResponse(static::sdk()->get(static::$resource . '/' . $id));
+        try {
+            return self::findOrFail($id, $params);
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    /**
+     * @param       $id
+     * @param array $params
+     *
+     * @return mixed
+     */
+    public static function findOrFail($id, $params = [])
+    {
+        return static::formatResponse(
+            static::sdk()->get(
+                static::$resource . '/' . $id,
+                static::mergeWithDefaultParams($params)
+            )
+        );
     }
 }

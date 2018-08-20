@@ -19,6 +19,11 @@ trait HasDelete
      */
     public static function delete($payload)
     {
-        return static::formatResponse(static::sdk()->delete(static::$resource, $payload));
+        return static::formatResponse(
+            static::sdk()->delete(
+                static::$resource,
+                $payload
+            )
+        );
     }
 }

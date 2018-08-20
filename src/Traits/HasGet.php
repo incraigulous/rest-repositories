@@ -19,6 +19,25 @@ trait HasGet
      */
     public static function get($params = [])
     {
-        return static::formatResponse(static::sdk()->get(static::$resource, $params));
+        try {
+            return static::getOrFail($params);
+        } catch (\Exception $ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Get the resource.
+     * @param  array  $params [description]
+     * @return array
+     */
+    public static function getOrFail($params = [])
+    {
+        return static::formatResponse(
+            static::sdk()->get(
+                static::$resource,
+                static::mergeWithDefaultParams($params)
+            )
+        );
     }
 }

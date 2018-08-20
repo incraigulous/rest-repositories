@@ -1,8 +1,4 @@
 <?php
-/**
- * HasAll.php
- * This is a short description of what's included in this file.
- */
 
 namespace Incraigulous\RestRepositories\Traits;
 
@@ -13,11 +9,31 @@ trait HasAll
     abstract static function sdk();
 
     /**
-     * Return the entire resource.
-     * @return \Illuminate\Support\Collection
+     * @param array $params
+     *
+     * @return mixed
      */
-    public static function all()
+    public static function all($params = [])
     {
-        return static::formatResponse(static::sdk()->get(static::$resource));
+        try {
+            return self::allOrFail($params);
+        } catch (\Exception $ex) {
+            return null;
+        }
+    }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public static function allOrFail($params = [])
+    {
+        return static::formatResponse(
+            static::sdk()->get(
+                static::$resource,
+                static::mergeWithDefaultParams($params)
+            )
+        );
     }
 }

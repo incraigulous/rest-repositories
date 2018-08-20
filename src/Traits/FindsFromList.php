@@ -11,7 +11,7 @@ trait FindsFromList
 {
     abstract static function formatResponse($response);
 
-    abstract public static function all();
+    abstract public static function all($params = []);
 
     /**
      * Find a result by key.

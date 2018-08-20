@@ -22,5 +22,4 @@ use Incraigulous\RestRepositories\Traits\HasUpdate;
 abstract class Resource extends Repository
 {
     use HasAll, HasCreate, HasDelete, HasFind, HasGet, HasUpdate;
-
 }

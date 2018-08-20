@@ -91,8 +91,18 @@ To create a new single extend `Incraigulous\RestRepositories\Single`:
 ```
 	class JsonPlaceholderPostsRepository extends JsonPlaceholderBaseRepository
 	{
+	    //This will be passed to your SDK as the resource. This is usually the last part of the URL.
 	    public static $resource = 'posts';
+	    
+	    //In case you need to set default paramaters on all requests from repository.
+	    protected static function defaultParams() 
+	    {
+	        return [
+	            'somefilter' => 'fromapi'
+            ]
+	    }
 	}
+	
 	
 	$posts = JsonPlaceholderPostsRepository::all();
     
