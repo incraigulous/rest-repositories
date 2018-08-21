@@ -7,6 +7,9 @@
 namespace Incraigulous\RestRepositories\Traits;
 
 
+use Incraigulous\RestRepositories\Collection;
+use Incraigulous\RestRepositories\Item;
+
 trait HasGet
 {
     abstract static function formatResponse($response);
@@ -29,7 +32,7 @@ trait HasGet
     /**
      * Get the resource.
      * @param  array  $params [description]
-     * @return array
+     * @return Collection|Item|null;
      */
     public static function getOrFail($params = [])
     {

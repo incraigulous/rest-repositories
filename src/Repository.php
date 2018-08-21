@@ -42,6 +42,6 @@ abstract class Repository implements RepositoryInterface
      */
     protected static function mergeWithDefaultParams($params)
     {
-        return array_merge(self::defaultParams(), $params);
+        return array_merge(static::defaultParams(), $params);
     }
 }
