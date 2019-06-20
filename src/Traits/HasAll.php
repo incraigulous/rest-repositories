@@ -16,7 +16,7 @@ trait HasAll
     public static function all($params = [])
     {
         try {
-            return self::allOrFail($params);
+            return static::allOrFail($params);
         } catch (\Exception $ex) {
             return null;
         }
