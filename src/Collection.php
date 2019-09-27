@@ -15,7 +15,7 @@ class Collection extends \Illuminate\Support\Collection
      */
     public function __construct($items = [], $dataKey = '')
     {
-        $items = $this->collect($items, $dataKey);
+        $items = $this->toObject($items, $dataKey);
         parent::__construct($items);
     }
 }
